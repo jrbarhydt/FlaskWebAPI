@@ -26,6 +26,6 @@ class Meal(Document):
     """
 
     name = StringField(required=True)
-    description = StringField()
+    description = StringField(max_length=120)
     price = FloatField()
     image_url = StringField()
