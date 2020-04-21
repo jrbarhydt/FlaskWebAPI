@@ -1,7 +1,7 @@
 from mongoengine import Document, StringField, FloatField
 
 
-class Meal(Document):
+class Meals(Document):
     """
     Template for a mongoengine document, which represents a user's favorite meal.
 
@@ -17,7 +17,7 @@ class Meal(Document):
     >>> mongoengine.connect(**default_config['MONGODB_SETTINGS'])
     MongoClient(host=['localhost:27017'], document_class=dict, tz_aware=False, connect=True, read_preference=Primary())
 
-    >>> new_meal = Meal(name= "Vegetable Spring Rolls", \
+    >>> new_meal = Meals(name= "Vegetable Spring Rolls", \
                         description= "These crisp veggie rolls are filled with"  \
                                      "cabbage, peppers, cucumber, and home-made peanut sauce.")
     >>> new_meal.save()
