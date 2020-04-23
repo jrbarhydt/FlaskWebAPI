@@ -1,14 +1,21 @@
 # flask packages
 from flask import Flask, app
+from flask_restful import Api
+from flask_mongoengine import MongoEngine
+from flask_jwt_extended import JWTManager
+
+# local packages
+from api.routes import create_routes
 
 # default mongodb configuration
 default_config = {'MONGODB_SETTINGS': {
-    'db': 'test_db',
-    'host': 'localhost',
-    'port': 27017,
-    'username': 'admin',
-    'password': 'password',
-    'authentication_source': 'admin'}}
+                    'db': 'test_db',
+                    'host': 'localhost',
+                    'port': 27017,
+                    'username': 'admin',
+                    'password': 'password',
+                    'authentication_source': 'admin'},
+                  'JWT_SECRET_KEY': 'changeThisKeyFirst'}
 
 
 def get_flask_app(config: dict = None) -> app.Flask:
@@ -24,6 +31,16 @@ def get_flask_app(config: dict = None) -> app.Flask:
     # configure app
     config = default_config if config is None else config
     flask_app.config.update(config)
+
+    # init api and routes
+    api = Api(app=flask_app)
+    create_routes(api=api)
+
+    # init mongoengine
+    db = MongoEngine(app=flask_app)
+
+    # init jwt manager
+    jwt = JWTManager(app=flask_app)
 
     return flask_app
 
