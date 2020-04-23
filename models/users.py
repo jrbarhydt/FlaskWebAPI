@@ -5,7 +5,8 @@ from mongoengine import (Document,
                          ListField,
                          StringField,
                          EmailField,
-                         BooleanField)
+                         BooleanField,
+                         ReferenceField)
 
 # flask packages
 from flask_bcrypt import generate_password_hash, check_password_hash
@@ -81,8 +82,8 @@ class Users(Document):
     email = EmailField(required=True, unique=True)
     password = StringField(required=True, min_length=6, regex=None)
     access = EmbeddedDocumentField(Access, default=Access(user=True, admin=False))
-    fav_meals = ListField(Meals)
-    name = StringField(unique=True)
+    fav_meals = ListField(ReferenceField(Meals))
+    name = StringField(unique=False)
     phone = PhoneField()
 
     def generate_pw_hash(self):
