@@ -1,3 +1,4 @@
+# mongo-engine packages
 from mongoengine import (Document,
                          EmbeddedDocument,
                          EmbeddedDocumentField,
@@ -5,8 +6,14 @@ from mongoengine import (Document,
                          StringField,
                          EmailField,
                          BooleanField)
+
+# flask packages
 from flask_bcrypt import generate_password_hash, check_password_hash
+
+# project resources
 from models.meals import Meals
+
+# external packages
 import re
 
 
@@ -50,6 +57,7 @@ class Users(Document):
     :param fav_meals: List of Meal objects
     :param name: option unique string username
     :param phone: optional string phone-number, must be valid via regex
+
     :Example:
 
     >>> import mongoengine
@@ -69,6 +77,7 @@ class Users(Document):
 
     .. seealso:: :class:`Access`, :class:`Phone`, :class:`models.meals.Meals`
     """
+
     email = EmailField(required=True, unique=True)
     password = StringField(required=True, min_length=6, regex=None)
     access = EmbeddedDocumentField(Access, default=Access(user=True, admin=False))
@@ -81,7 +90,7 @@ class Users(Document):
     # Use documentation from BCrypt for password hashing
     generate_pw_hash.__doc__ = generate_password_hash.__doc__
 
-    def check_pw_hash(self, password):
+    def check_pw_hash(self, password: str) -> bool:
         return check_password_hash(pw_hash=self.password, password=password)
     # Use documentation from BCrypt for password hashing
     check_pw_hash.__doc__ = check_password_hash.__doc__
