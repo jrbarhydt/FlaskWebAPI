@@ -31,6 +31,7 @@ def get_flask_app(config: dict = None) -> app.Flask:
     # configure app
     config = default_config if config is None else config
     flask_app.config.update(config)
+    flask_app.config.from_envvar('MONGODB_URI')
 
     # init api and routes
     api = Api(app=flask_app)
