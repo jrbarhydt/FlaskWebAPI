@@ -9,7 +9,7 @@ from api.routes import create_routes
 
 # external packages
 import os
-
+from tools.mongo_loader import mongo
 # default mongodb configuration
 default_config = {'MONGODB_SETTINGS': {
                     'db': 'test_db',
@@ -20,7 +20,7 @@ default_config = {'MONGODB_SETTINGS': {
                     'authentication_source': 'admin'},
                   'JWT_SECRET_KEY': 'changeThisKeyFirst'}
 
-
+@mongo
 def get_flask_app(config: dict = None) -> app.Flask:
     """
     Initializes Flask app with given configuration.

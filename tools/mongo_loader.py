@@ -6,7 +6,7 @@ from app import default_config
 
 # external packages
 from types import FunctionType
-
+import os
 
 def mongo(function: FunctionType) -> FunctionType:
     """
@@ -16,6 +16,8 @@ def mongo(function: FunctionType) -> FunctionType:
     :return: wrapper function
     """
     def load():
+        if 'MONGODB_URI' in os.environ:
+            default_config.update({'MONGODB_SETTINGS': {"host": os.environ['MONGODB_URI']}})
         mongoengine.connect(**default_config['MONGODB_SETTINGS'])
         function()
     return load
