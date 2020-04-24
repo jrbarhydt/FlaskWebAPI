@@ -9,7 +9,7 @@ from api.routes import create_routes
 
 # external packages
 import os
-from tools.mongo_loader import mongo
+
 # default mongodb configuration
 default_config = {'MONGODB_SETTINGS': {
                     'db': 'test_db',
