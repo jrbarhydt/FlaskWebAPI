@@ -35,7 +35,8 @@ def get_flask_app(config: dict = None) -> app.Flask:
     # config = default_config if config is None else config
     # flask_app.config.update(config)
     # if 'MONGODB_URI' in os.environ:
-    flask_app.config['MONGODB_SETTINGS'] = {'host': 'mongodb://admin:admin123@ds145128.mlab.com:45128/heroku_0ggqk6b1'}
+    flask_app.config['MONGODB_SETTINGS'] = {'host': 'mongodb://admin:admin123@ds145128.mlab.com:45128/heroku_0ggqk6b1',
+                                            'retryWrites': False}
 
     # init api and routes
     api = Api(app=flask_app)
