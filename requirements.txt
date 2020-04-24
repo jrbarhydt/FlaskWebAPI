@@ -1,0 +1,6 @@
+Flask
+mongoengine
+Flask-Bcrypt
+Flask-JWT-Extended
+Flask-RESTful
+gunicorn
