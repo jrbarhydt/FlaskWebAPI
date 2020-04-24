@@ -34,15 +34,15 @@ def get_flask_app(config: dict = None) -> app.Flask:
     # configure app
     config = default_config if config is None else config
     flask_app.config.update(config)
-    if 'MONGODB_URI' in os.environ:
-        flask_app.config.update({'MONGODB_SETTINGS': {"host": os.environ['MONGODB_URI']}})
+    # if 'MONGODB_URI' in os.environ:
+    #     flask_app.config.update({'MONGODB_SETTINGS': {"host": os.environ['MONGODB_URI']}})
 
     # init api and routes
     api = Api(app=flask_app)
     create_routes(api=api)
 
     # init mongoengine
-    db = MongoEngine(app=flask_app)
+    # db = MongoEngine(app=flask_app)
 
     # init jwt manager
     jwt = JWTManager(app=flask_app)
