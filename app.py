@@ -7,6 +7,9 @@ from flask_jwt_extended import JWTManager
 # local packages
 from api.routes import create_routes
 
+# external packages
+import os
+
 # default mongodb configuration
 default_config = {'MONGODB_SETTINGS': {
                     'db': 'test_db',
@@ -31,7 +34,8 @@ def get_flask_app(config: dict = None) -> app.Flask:
     # configure app
     config = default_config if config is None else config
     flask_app.config.update(config)
-    flask_app.config.from_envvar('MONGODB_URI')
+    if 'MONGODB_URI' in os.environ:
+        flask_app.config.update({'MONGODB_SETTINGS': {"host": os.environ['MONGODB_URI']}})
 
     # init api and routes
     api = Api(app=flask_app)
