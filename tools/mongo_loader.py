@@ -2,7 +2,7 @@
 import mongoengine
 
 # project resources
-from app import default_config
+# from app import default_config
 
 # external packages
 from types import FunctionType
