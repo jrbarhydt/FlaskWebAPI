@@ -42,7 +42,7 @@ def get_flask_app(config: dict = None) -> app.Flask:
     create_routes(api=api)
 
     # init mongoengine
-    # db = MongoEngine(app=flask_app)
+    db = MongoEngine(app=flask_app)
 
     # init jwt manager
     jwt = JWTManager(app=flask_app)
