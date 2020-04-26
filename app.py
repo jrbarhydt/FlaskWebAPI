@@ -34,6 +34,8 @@ def get_flask_app(config: dict = None) -> app.Flask:
     # configure app
     config = default_config if config is None else config
     flask_app.config.update(config)
+
+    # load config variables
     if 'MONGODB_URI' in os.environ:
         flask_app.config['MONGODB_SETTINGS'] = {'host': os.environ['MONGODB_URI'],
                                                 'retryWrites': False}
