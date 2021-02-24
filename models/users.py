@@ -98,5 +98,6 @@ class Users(Document):
 
     def save(self, *args, **kwargs):
         # Overwrite Document save method to generate password hash prior to saving
-        self.generate_pw_hash()
+        if self._created:
+          self.generate_pw_hash()
         super(Users, self).save(*args, **kwargs)
