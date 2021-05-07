@@ -5,6 +5,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 # project resources
 from models.meals import Meals
+from models.users import Users
 from api.errors import forbidden
 
 
@@ -45,7 +46,7 @@ class MealsApi(Resource):
 
         :return: JSON object
         """
-        authorized: bool = Meals.objects.get(id=get_jwt_identity()).access.admin
+        authorized: bool = Users.objects.get(id=get_jwt_identity()).access.admin
 
         if authorized:
             data = request.get_json()
@@ -105,7 +106,7 @@ class MealApi(Resource):
 
         :return: JSON object
         """
-        authorized: bool = Meals.objects.get(id=get_jwt_identity()).access.admin
+        authorized: bool = Users.objects.get(id=get_jwt_identity()).access.admin
 
         if authorized:
             output = Meals.objects(id=user_id).delete()
